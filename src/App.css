@@ -13,6 +13,15 @@
   }
 }
 
+iframe#webpack-dev-server-client-overlay{display:none!important}
+
+.slider {
+  display:flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: cxenter;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
