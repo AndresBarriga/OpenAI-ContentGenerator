@@ -116,13 +116,6 @@ const [selectedTone, setSelectedTone] = useState("Formal Tone");
         }}>
          Select the tone of your Cover Letter.
         </Typography>
-        {/* <Typography variant="body3"gutterBottom
-        sx={{
-          textAlign: 'left'
-        }}>
-         Formal: For professional and corporate job applications. <br></br>
-Casual: For startups or less formal environments..
-        </Typography> */}
         
         <FormControlLabel
           control={
@@ -230,7 +223,7 @@ Casual: For startups or less formal environments..
         </Typography>
       <Paper className="paper-container" elevation={3}>
         {/* Display the entire response message as is */}
-        <p style={{ padding: '20px' }}>{response}</p>
+        <pre style={{ padding: '20px', whiteSpace: 'pre-wrap' }}>{response}</pre>
       </Paper>
     </div>
   </div>
