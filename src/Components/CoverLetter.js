@@ -39,32 +39,6 @@ const [selectedTone, setSelectedTone] = useState("Formal Tone");
     e.preventDefault();
     setLoading(true);
     const lengthAsString = length.toString()
-   /*  const originallength = length;
-    const lengthAsString = originallength.toString()
-    const cv = cv;
-    const joboffer = joboffer;
-    const length = lengthAsString;
-    const selectedTone = selectedTone
-    const interest = interest
-    const achievements = achievements
-    const skills = skills
-    const company = company */
-    
-
-    console.log(skills)
-
-  /*   const message = `
-      CV: ${cv}
-      joboffer: ${joboffer}
-      length: ${lengthAsString}
-      selectedTone: ${selectedTone}
-      interest: ${interest}
-      achievements: ${achievements}
-      skills: ${skills}
-      company: ${company}
-    `; */
-
-    /* console.log(message) */
     
     fetch("http://localhost:3001/coverLetterWriter", {
       method: "POST",
@@ -98,21 +72,23 @@ const [selectedTone, setSelectedTone] = useState("Formal Tone");
 
   return (
     <div className="App">
+
       <Box
         component="div"
         sx={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          '& .MuiTextField-root': { m: 1, width: '50%' }, // Make text fields full width
+          '& .MuiTextField-root': { m: 1, width: '60%' }, // Make text fields full width
         }}
         noValidate
         autoComplete="off"
       >
-        <Typography variant="h2" gutterBottom>
+        <Typography variant="h3" style={{ paddingTop: "20px" }} 
+        gutterBottom>
           Cover Letter Generator 🤖👨🏻‍💻
         </Typography>
-        <Typography variant="body1" gutterBottom>
+        <Typography variant="body1" style={{ paddingInline: "auto" }} gutterBottom>
           Explore the power of AI to help you create a Cover Letter that perfectly match your experience and suited for the job you are applying
         </Typography>
         <TextField
@@ -134,19 +110,19 @@ const [selectedTone, setSelectedTone] = useState("Formal Tone");
           maxRows={6}
         />
         
-         <Typography variant="h5"gutterBottom
+         <Typography variant="h5" style={{ paddingTop: "20px" }} gutterBottom
         sx={{
           textAlign: 'left'
         }}>
          Select the tone of your Cover Letter.
         </Typography>
-        <Typography variant="body3"gutterBottom
+        {/* <Typography variant="body3"gutterBottom
         sx={{
           textAlign: 'left'
         }}>
          Formal: For professional and corporate job applications. <br></br>
 Casual: For startups or less formal environments..
-        </Typography>
+        </Typography> */}
         
         <FormControlLabel
           control={
@@ -162,7 +138,7 @@ Casual: For startups or less formal environments..
             textAlign: 'left',
           }}
         />
-        <Typography variant="h5"gutterBottom
+        <Typography variant="h5" style={{ paddingTop: "20px" }} gutterBottom
         sx={{
           textAlign: 'left'
         }}>
@@ -182,7 +158,7 @@ Casual: For startups or less formal environments..
           min={150}
           max={450}
         />
-        <Typography variant="h5"gutterBottom
+        <Typography variant="h5" style={{ paddingTop: "20px" }} gutterBottom
         sx={{
           textAlign: 'left'
         }}>
@@ -254,7 +230,7 @@ Casual: For startups or less formal environments..
         </Typography>
       <Paper className="paper-container" elevation={3}>
         {/* Display the entire response message as is */}
-        <pre style={{ padding: '20px', whiteSpace: 'pre-wrap' }}>{response}</pre>
+        <p style={{ padding: '20px' }}>{response}</p>
       </Paper>
     </div>
   </div>
