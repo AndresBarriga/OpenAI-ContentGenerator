@@ -1,5 +1,4 @@
 import React, { useState} from "react";
-import "../App.css";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -88,7 +87,7 @@ const [selectedTone, setSelectedTone] = useState("Formal Tone");
         gutterBottom>
           Cover Letter Generator 🤖👨🏻‍💻
         </Typography>
-        <Typography variant="body1" style={{ paddingInline: "auto" }} gutterBottom>
+        <Typography variant="body1"  style={{ paddingInline: "auto" }} gutterBottom>
           Explore the power of AI to help you create a Cover Letter that perfectly match your experience and suited for the job you are applying
         </Typography>
         <TextField
@@ -234,3 +233,4 @@ const [selectedTone, setSelectedTone] = useState("Formal Tone");
 }
 
 export default CoverLetterApp;
+
