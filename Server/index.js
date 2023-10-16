@@ -4,7 +4,6 @@ const bodyParser = require ("body-parser");
 const cors = require("cors");
 const app = express();
 const port = 3001 ;
-const prompt1 = require("./routes/coverLetterWriter");
 
 require('dotenv').config()
 
@@ -71,6 +70,111 @@ app.post("/coverLetterWriter", async (req, res) => {
         message: completion.choices[0].message.content
       })
       
+    }
+  });
+
+  app.post("/MeetingNotesWriter", async (req, res) => {
+    const {
+      title,
+      date,
+      time,
+      agenda,
+      participants,
+      decisions,
+      topics,
+      actionitems,
+      selectedTone
+      } = req.body;
+
+    
+      
+    const completion = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [
+    {
+      "role": "system",
+      "content": "You are the best employee at taking notes and documenting results, your mission is to write meeting notes (email style)."
+      },
+      {
+      "role": "user",
+      "content":
+      `
+      I need you to write meeting notes in a ${selectedTone} style, a for the meeting that have took place so everyone that was participating knows what was discussed and what are the next steps.
+      The meeting title is ${title} and was held on ${date} and ${time}.
+      The people taking part in the meeting were ${participants}. The meeting's agenda covered ${agenda}. 
+      During the meeting, the following key points were discussed: ${topics}. 
+      The decisions made during the meeting were [${decisions}.
+      The action meeting agreed were ${actionitems} (if deadline provided include it,
+        IMPORTANT*  if person asigned to an action item, and email is known, mention in @"Email address" format "
+        Example: @andresbarriga@gmail.com needs to send status update by friday EOD
+      For the tone follow the next indications:
+      Formal Tone: Write a professional email with a structured and formal language.
+      Casual Tone: Draft a friendly message for an internal team meeting in a relaxed and approachable style.
+      Technical Tone: Compose a communication for a highly technical meeting, incorporating specialized terminology and jargon.
+      Business Tone: Write a concise message suitable for a general business meeting, maintaining a neutral and clear language.
+      Executive Tone: Create a brief and focused message for a meeting with top-level executives, emphasizing key points.
+      Project-Specific Tone: Develop a communication tailored to a specific project or industry, adapting the tone accordingly.
+      Pushing Tone: Draft an email with a sense of urgency, clear call-to-action statements, positive reinforcement, politeness, and a commitment to follow up
+    `}
+  ],
+  temperature: 1,
+  max_tokens: 700,
+  top_p: 1,
+  frequency_penalty: 0,
+  presence_penalty: 0.5,
+    });
+    
+    if (completion.choices) {
+      res.json({
+        message: completion.choices[0].message.content
+      })
+    }
+  });
+
+  app.post("/code/automatic-comments", async (req, res) => {
+    const {
+      language,
+      code,
+      featurePurpose,
+      proficiencyLevel,
+      documentationStandards,
+      } = req.body;
+
+    console.log(language);
+    console.log(documentationStandards)
+   
+      
+    const completion = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          "role": "system",
+          "content": "You are a senior full stack developer engineer"
+        },
+        {
+          "role": "user",
+          "content": `Your goal is to add comprehensive comments to the code provided. You will answer only with the commented code, comments within lines. All explanations should be contained within the code
+          Consider the following scenarios and provide appropriate comments for the code:
+          1 - The code is written in ${language}
+          2 - it's main functionality is to ${featurePurpose} 3
+          3- IMPORTANT - Take into account that people looking at the code will have ${proficiencyLevel} proficiency level, so make the comments suitable for them. (i.E, a beginner will need different explanations that an advanced)
+          4- Please follow the documentation standars accoriding to ${documentationStandards}
+          5- Expected use of the comments is: Code Review and easy comprehension
+          6 - Code for you to analyse and comment :${code}
+          Code Review Comments -Yes`
+        }
+      ],
+      temperature: 1,
+      max_tokens: 2000,
+      top_p: 1,
+      frequency_penalty: 0,
+      presence_penalty: 0,
+    });
+    
+    if (completion.choices) {
+      res.json({
+        message: completion.choices[0].message.content
+      })
     }
   });
 

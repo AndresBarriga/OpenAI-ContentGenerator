@@ -18,6 +18,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import dayjs from 'dayjs';
 
 
 function MeetingNotesApp() {
@@ -28,7 +29,8 @@ function MeetingNotesApp() {
   const [agenda, setAgenda] = useState("");
   const [decisions, setDecisions] = useState("");
   const [actionitems, setActionitems] = useState("");
-  const [selectedTone, setSelectedTone] = useState("Formal Tone");
+  const [topics, setTopics]= useState("");
+  const [selectedTone, setSelectedTone] = useState("Formal");
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
   const [generatedMeetingNotes, setGeneratedMeetingNotes] = useState("");
@@ -38,10 +40,30 @@ function MeetingNotesApp() {
     setSelectedTone(event.target.value);
   };
 
+  const handleDateChange = (newDate) => {
+    if (newDate instanceof dayjs) {
+      const formattedDate = dayjs(newDate).format('DD/MM/YYYY'); 
+      setDate(formattedDate);
+    }
+  };
+  const handleTimeChange = (newTime) => {
+    if (newTime instanceof dayjs) {
+      const formattedTime = dayjs(newTime).format('HH:mm'); 
+      setTime(formattedTime);
+      
+    }
+  };
+
+
+
+
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
+    
     
     fetch("http://localhost:3001/MeetingNotesWriter", {
       method: "POST",
@@ -57,20 +79,20 @@ function MeetingNotesApp() {
         decisions,
         actionitems,
         generatedMeetingNotes,
-        selectedTone
+        selectedTone,
+        topics
       }),
+      
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
         const generatedMeetingNotes = data.message;
         console.log(generatedMeetingNotes);
         setGeneratedMeetingNotes(data.message);
         setLoading(false);
         setResponse(generatedMeetingNotes)
-
       });
-
+      
   };
 
 
@@ -107,12 +129,12 @@ function MeetingNotesApp() {
               <DateField
   label="Date of the Meeting"
   value={date}
-  onChange={(e) => setDate(e.target.value)}
+  onChange={(newDate) => handleDateChange(newDate)}
 />
               <TimePicker
           label="Time of the meeting"
           value={time}
-          onChange={(e) => setTime(e.target.value)}
+          onChange={(newTime) => handleTimeChange(newTime)}
         />
         <TextField
           id="Agenda"
@@ -131,6 +153,15 @@ function MeetingNotesApp() {
           value={participants}
           placeholder="Include all the participants on the meeting, for better functionality include their emails close to their name"
           onChange={(e) => setParticipants(e.target.value)}
+          multiline
+          maxRows={6}
+        />
+        <TextField
+          id="topics"
+          label="Topics discussed"
+          value={topics}
+          placeholder="Include the topics discussed during the meeting"
+          onChange={(e) => setTopics(e.target.value)}
           multiline
           maxRows={6}
         />

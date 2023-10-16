@@ -78,8 +78,19 @@ function Home(){
   <span className="text-xs sm:text-lg font-general-medium duration-100">
     Cover Letter
   </span>
-  
   <RiAiGenerate className="sm:ml-2 sm:mr-3 h-5 w-5 sm:w-6 sm:h-6 duration-100"></RiAiGenerate>
+  </a>
+  <a
+  href="/MeetingNotesWriter"
+  className="mx-7 font-general-medium text-sm flex justify-center items-center w-36 pl-5 pr-2 md:pl-0 md:pr-0 sm:w-48 mt-6 mb-6 sm:mb-0 md:text-lg border border-indigo-200 py-2.5 sm:py-3 shadow-lg rounded-lg bg-indigo-50 focus:ring-1 focus:ring-indigo-900 hover:bg-indigo-500 text-gray-500 hover:text-white duration-500"
+  aria-label="Meeting Notes AI"
+>
+  
+  <span className="text-xs sm:text-lg font-general-medium duration-100">
+    Meeting Notes
+  </span>
+  
+  <RiAiGenerate className="	self-end sm:ml-2 sm:mr-3 h-5 w-5 sm:w-6 sm:h-6 duration-100"></RiAiGenerate>
 </a>
                 </motion.div>
             </div>

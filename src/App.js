@@ -8,6 +8,7 @@ import Home from './Components/Home';
 import { ThemeProvider } from '@mui/material/styles'; 
 import theme from './colortheme';
 import MeetingNotesApp from './Components/MeetingNotes';
+import CodeCommentingApp from './Components/CodeCommenting';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" exact element={<Home/>} />
         <Route path="/coverLetterWriter" exact element={<CoverLetter/>} />
         <Route path="/MeetingNotesWriter" exact element={<MeetingNotesApp/>} />
+        <Route path="/code/automatic-comments" exact element={<CodeCommentingApp/>} />
         {/* Add routes for other features */}
       </Routes>
       <AppFooter />
