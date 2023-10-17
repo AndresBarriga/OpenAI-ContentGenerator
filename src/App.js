@@ -9,6 +9,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from './colortheme';
 import MeetingNotesApp from './Components/MeetingNotes';
 import CodeCommentingApp from './Components/CodeCommenting';
+import TestAutomatedApp from "./Components/TestAutomated";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/coverLetterWriter" exact element={<CoverLetter/>} />
         <Route path="/MeetingNotesWriter" exact element={<MeetingNotesApp/>} />
         <Route path="/code/automatic-comments" exact element={<CodeCommentingApp/>} />
+        <Route path="/code/automatic-tests" exact element={<TestAutomatedApp/>} />
         {/* Add routes for other features */}
       </Routes>
       <AppFooter />

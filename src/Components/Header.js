@@ -125,7 +125,7 @@ const AppHeader = () => {
 				
 				
 			
-				{/* Header right section buttons */}
+				
 
 				<div className="hidden sm:flex justify-end items-center md:flex-row ml-auto">
 						<Link to="https://calendly.com/andresbarriga/30min">

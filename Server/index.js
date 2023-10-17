@@ -161,7 +161,8 @@ app.post("/coverLetterWriter", async (req, res) => {
           4- Please follow the documentation standars accoriding to ${documentationStandards}
           5- Expected use of the comments is: Code Review and easy comprehension
           6 - Code for you to analyse and comment :${code}
-          Code Review Comments -Yes`
+          Code Review Comments -Yes
+          `
         }
       ],
       temperature: 1,
@@ -177,6 +178,103 @@ app.post("/coverLetterWriter", async (req, res) => {
       })
     }
   });
+
+  app.post("/code/automatic-tests/user-story", async (req, res) => {
+    const {
+      userStory
+      } = req.body;
+
+    
+      
+    const completion = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [
+    {
+      "role": "system",
+      "content": "You are a very senior QA engineer"
+      },
+      {
+      "role": "user",
+      "content":
+      `As part of our software testing efforts, we need assistance in creating automated test scripts for a new feature
+      in our AI Content Generator website that allows users to paste their code and have it back with proper commenting. 
+      Please help with the following: Generate test cases (incl. action and expected result) for the feature based on the
+      given description.
+      Present only test scenarios, including positive, negative cases. Highlight potential edge cases for testing. 
+      ${userStory}
+          
+      Example format for response:
+      Positive Scenarios: 
+      1. (Scenario Description)
+      Action: (Expected action)
+      Expected Result_ (Expected Result)
+      2...
+      3...
+      Negative Scenarios:
+      4....
+      5...
+      Edge Scenarios:
+      6...
+      7...
+    `}
+  ],
+  temperature: 1,
+  max_tokens: 700,
+  top_p: 1,
+  frequency_penalty: 0,
+  presence_penalty: 0.5,
+    });
+    
+    if (completion.choices) {
+      res.json({
+        message: completion.choices[0].message.content
+      })
+    }
+  });
+
+
+app.post("/code/automatic-tests/unit-testing", async (req, res) => {
+    const {
+      choosenTestScenario,
+            userStory,
+            code,
+      } = req.body;
+
+      console.log(choosenTestScenario)
+      console.log(userStory)
+      console.log(code)
+
+  const response = await openai.chat.completions.create({
+    model: "gpt-4",
+    messages: [
+      {
+        "role": "system",
+        "content": "You are an expert QA engineer"
+      },
+      {
+        "role": "user",
+        "content": `I need you to create a Unit Test focusing on the next scenario for the following code, explanation of the feature provided on the user story.
+        Context/ Scenario that the test will cover : ${choosenTestScenario}
+        The purpose of the feature is : ${userStory}
+        The code to test is : ${code}
+        `,
+      }
+    ],
+    temperature: 1,
+    max_tokens: 2499,
+    top_p: 1,
+    frequency_penalty: 0,
+    presence_penalty: 0,
+  });
+   
+  if (response.choices) {
+    console.log(response.choices[0].message.content)
+    res.json({
+      response: response.choices[0].message.content
+    })
+  }
+});
+  
 
 app.listen(port , () => {
     console.log("Example app listening " + port)
