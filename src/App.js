@@ -10,6 +10,7 @@ import theme from './colortheme';
 import MeetingNotesApp from './Components/MeetingNotes';
 import CodeCommentingApp from './Components/CodeCommenting';
 import TestAutomatedApp from "./Components/TestAutomated";
+import AboutMeBio from './Components/About/AboutMeHeader';;
 
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
         <Route path="/MeetingNotesWriter" exact element={<MeetingNotesApp/>} />
         <Route path="/code/automatic-comments" exact element={<CodeCommentingApp/>} />
         <Route path="/code/automatic-tests" exact element={<TestAutomatedApp/>} />
+        <Route path="/about" exact element={<AboutMeBio/>} />
+        
         {/* Add routes for other features */}
       </Routes>
       <AppFooter />

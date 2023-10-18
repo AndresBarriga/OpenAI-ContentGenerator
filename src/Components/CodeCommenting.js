@@ -43,7 +43,7 @@ function CodeCommentingApp() {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
-        fetch("http://localhost:3001/code/automatic-comments", {
+        fetch("/code/automatic-comments", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

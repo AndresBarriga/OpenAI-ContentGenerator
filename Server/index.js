@@ -240,10 +240,7 @@ app.post("/code/automatic-tests/unit-testing", async (req, res) => {
             code,
       } = req.body;
 
-      console.log(choosenTestScenario)
-      console.log(userStory)
-      console.log(code)
-
+  
   const response = await openai.chat.completions.create({
     model: "gpt-4",
     messages: [
@@ -254,6 +251,7 @@ app.post("/code/automatic-tests/unit-testing", async (req, res) => {
       {
         "role": "user",
         "content": `I need you to create a Unit Test focusing on the next scenario for the following code, explanation of the feature provided on the user story.
+        Please answer only with the Unit Test Code
         Context/ Scenario that the test will cover : ${choosenTestScenario}
         The purpose of the feature is : ${userStory}
         The code to test is : ${code}

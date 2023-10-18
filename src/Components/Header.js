@@ -74,13 +74,7 @@ const AppHeader = () => {
 				>
 					Home
 				</Link>
-				<Link
-					to="/products"
-					className="block text-left text-lg text-primary-dark  hover:text-secondary-dark  sm:mx-4 mb-2 sm:py-2 border-t-2 pt-3 sm:pt-2 sm:border-t-0 border-primary-light "
-					aria-label="Products"
-				>
-					Products
-				</Link>
+				
 
 				<Link
 					to="/about"
@@ -107,13 +101,7 @@ const AppHeader = () => {
 				>
 					Home
 				</Link>
-				<Link
-					to="/products"
-					className="block text-left text-lg text-primary-dark  hover:text-secondary-dark   sm:mx-4 mb-2 sm:py-2"
-					aria-label="Products"
-				>
-					Products
-				</Link>
+			
 			
 				<Link
 					to="/about"

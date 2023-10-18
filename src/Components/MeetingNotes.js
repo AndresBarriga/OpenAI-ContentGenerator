@@ -65,7 +65,7 @@ function MeetingNotesApp() {
     setLoading(true);
     
     
-    fetch("http://localhost:3001/MeetingNotesWriter", {
+    fetch("/MeetingNotesWriter", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

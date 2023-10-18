@@ -39,7 +39,7 @@ const [selectedTone, setSelectedTone] = useState("Formal Tone");
     setLoading(true);
     const lengthAsString = length.toString()
     
-    fetch("http://localhost:3001/coverLetterWriter", {
+    fetch("/coverLetterWriter", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
